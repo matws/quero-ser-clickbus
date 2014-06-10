@@ -1,0 +1,79 @@
+<!DOCTYPE HTML> 
+<html>
+<head>
+<style>
+.error {color: #FF0000;}
+</style>
+</head>
+<body> 
+
+<?php
+// define variables and set to empty values
+$enteroErr  = "";
+$entero =  "";
+$i = $array;
+
+$array = array( '10', '1', '-20',  '14', '99', '136', '19', '20', '117', '22', '93', '120', '131' );
+   
+  echo "Tot Before: ".count($array)."<br/><br/>"; /*Read of array*/
+      $count = count($array);
+       for ($i=0; $i<$count; $i++) {
+        if ($i === 15) {
+            unset($array[$i]);
+        }
+        echo "Count: ".count($array). " - Position: ".$i."<br>";
+    }
+    echo "<br/> Tot After: ".count($array)."<br/>";
+	
+                                              /*Validations */                 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   if (empty($_POST["entero"])) {
+     $enteroErr = "entero is required";
+   } else {
+     $entero = test_input($_POST["entero"]);
+     // check if entero only contains letters and whitespace
+     if (!preg_match("/^[0-90-9 ]*$/",$entero)) {
+       $enteroErr = "Not empty allowed"; 
+     }
+   }
+    
+   if (empty($_POST["gender"])) {
+     $genderErr = "Gender is required";
+   } else {
+     $gender = test_input($_POST["gender"]);
+   }
+ }
+
+function test_input($data) {
+   $data = trim($data);
+   $data = stripslashes($data);
+   $data = htmlspecialchars($data);
+   return $data;
+}
+?>
+
+<h2>PHP Form Validation Example</h2>
+<p><span class="error">* required field.</span></p>
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"> 
+   Entero: <input type="text" entero="entero" value="<?php echo $entero;?>">
+   <span class="error">* <?php echo $enteroErr;?></span>
+   <br><br>
+   
+   Gender:
+   <input type="radio" entero="gender" <?php if (isset($gender) && $gender=="negativo") echo "checked";?>  value="negativo">Negativo
+   <input type="radio" entero="gender" <?php if (isset($gender) && $gender=="positivo") echo "checked";?>  value="positivo">Positivo
+   <span class="error">* <?php echo $genderErr;?></span>
+   <br><br>
+   <input type="submit" entero="submit" value="Submit"> 
+</form>
+
+<?php
+echo "<h2>Your Input split:</h2>";
+echo $entero;
+echo "<br>";
+echo $gender;
+
+?>
+
+</body>
+</html>
