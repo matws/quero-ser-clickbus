@@ -28,7 +28,7 @@ class CashMachine {
       * Reducción al mínimo el número total de cuentas distribuidas. 
       * Ejemplo: getmontos (350) => array (100 => 1, 200 => 1, 50 => 1). 
       * 
-      * @ Param int $ withdrawAmount ¿Cuánto queremos a retirarse del cajero automático
+      * @ Param int $montodisposicion ¿Cuánto queremos a retirarse del cajero automático?
       * @ Throws RetiroException si la cantidad exacta no puede ser obtenida con los billetes disponibles. 
       * @ Return Array asociativo matriz que representa los proyectos de ley que deben ser distribuidos por el cajero automático. 
       * /
