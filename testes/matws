@@ -1,0 +1,57 @@
+<?php
+	$nombre = "ATM";
+	
+	echo "<br />";
+	echo "Bienvenidos usuarios $nombre";
+
+include_once( dirname(__FILE__). "/../Retiros.php"); // directorio superior  
+		 
+
+class RetiroException extends Retiros {
+	  
+	  }
+ 
+class CashMachine {
+ 
+    /**
+     * ATM. Cantitades consideradas.
+     */
+    private $montos = array(10, 20, 50, 100);
+    private $cash_diponible;
+    private $cash = array();
+ 
+    function __construct() {
+        rsort($this->montos);
+    }
+ 
+	public function getmontos($montodisposicion) {
+        $this->cash = array();
+        $this->cash_diponible = $montodisposicion;
+        while ($this->cash_diponible > 0) {
+            if ($this->cash_diponible < min($this->montos)) {
+                throw new RetiroException('Sin fondo disponible.');
+            }
+            $monto = $this->configuremontos();
+            $this->cash[] = $monto;
+            $this->cash_diponible -= $monto;
+        }
+        return array_count_values($this->cash);
+    }
+ 
+    private function configuremontos() {
+        foreach ($this->montos as $monto) {
+            $division = $this->cash_diponible / $monto;
+            $rest = $this->cash_diponible % $monto;
+            if ( ($division >= 1) && ( $rest > (min($this->montos)+1) || ($rest === min($this->montos)) || ($rest === 0) ) ) {
+                return $monto;
+            }
+        } 
+        return min($this->montos);
+    }
+ 
+}
+ 
+$atm = new CashMachine;
+print_r($atm->getmontos(52));
+
+?>
