@@ -14,8 +14,9 @@ class CashMachine {
    / ** 
       * Los valores de factura disponible en el cajero automático. Considere las cantidades son ilimitadas. 
       * /
-    private $montos = array(10, 20, 50, 100);
-    private $cash_diponible;
+      
+    private $montos = array(50, 100, 200, 500, 1000);
+    private $cash_diponible; 
     private $cash = array();
  
     function __construct() {
@@ -23,12 +24,12 @@ class CashMachine {
     }
 	
 	/ ** 
-      * Devuelve los Bills que se debe dar distribuidos es la cantidad y retirar las facturas disponibles, 
+      * Devuelve los Montos que se debe dar distribuidos es la cantidad y retirar las facturas disponibles, 
       * Reducción al mínimo el número total de cuentas distribuidas. 
-      * Ejemplo: getBills (72) => array (2 => 1, 20 => 1, 50 => 1). 
+      * Ejemplo: getmontos (350) => array (100 => 1, 200 => 1, 50 => 1). 
       * 
       * @ Param int $ withdrawAmount ¿Cuánto queremos a retirarse del cajero automático
-      * @ Throws WithdrawException si la cantidad exacta no puede ser obtenida con los billetes disponibles. 
+      * @ Throws RetiroException si la cantidad exacta no puede ser obtenida con los billetes disponibles. 
       * @ Return Array asociativo matriz que representa los proyectos de ley que deben ser distribuidos por el cajero automático. 
       * /
  
@@ -60,6 +61,6 @@ class CashMachine {
 }
  
 $atm = new CashMachine;
-print_r($atm->getmontos(52));
+print_r($atm->getmontos(350));
 
 ?>
