@@ -5,7 +5,7 @@
 
 include_once( dirname(__FILE__). "/../Retiros.php"); // directorio superior  
 		 
-class RetiroException extends Exception {
+class RetiroException extends /Exception {
 	  
 	  }
  
